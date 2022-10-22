@@ -6,6 +6,8 @@ const images = () =>{
     popupImg.classList.add('popup');
     workSection.appendChild(popupImg);
 
+    bigImage.style.width = '700px';
+    bigImage.style.height = '500px';
     popupImg.style.justifyContent = 'center';
     popupImg.style.alignItems = 'center';
     popupImg.style.display = 'none';
@@ -21,10 +23,12 @@ const images = () =>{
             popupImg.style.display = 'flex';
             const path = target.parentNode.getAttribute('href');
             bigImage.setAttribute('src', path);
+            document.body.style.overflow = 'hidden';
         }
 
         if (target && target.matches('div.popup')) {
             popupImg.style.display = 'none';
+            document.body.style.overflow = '';
         }
     });
 };
