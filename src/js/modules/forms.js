@@ -1,5 +1,6 @@
 import checkNumInputs from './checkNumInputs';
 
+
 const forms = (state) =>{
     const forms = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input');
@@ -9,7 +10,7 @@ const forms = (state) =>{
   
     const message = {
         loading: 'Загрузка...',
-        success: 'Спасибо!Мы скоро с Вами свяжемся',
+        success: 'Спасибо!Мы с Вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
 
@@ -30,7 +31,7 @@ const forms = (state) =>{
     forms.forEach(item => {
         item.addEventListener('submit', (e) =>{
             e.preventDefault();
-
+            
             let statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
@@ -41,6 +42,7 @@ const forms = (state) =>{
                     formData.append(key, state[key]);
                 }
             }
+            
             postData('assets/server.php', formData)
                 .then(res =>{
                     console.log(res);
@@ -51,7 +53,15 @@ const forms = (state) =>{
                     clearInputs();
                     setTimeout(() =>{
                         statusMessage.remove();
-                    }, 4000);
+                    }, 5000);
+                    setTimeout(() =>{
+                        const window = document.querySelectorAll('[data-modal]');
+                        window.forEach(items =>{
+                            items.style.display = 'none';
+                            document.body.style.overflow = '';
+                            document.body.style.marginRight = `0px`;
+                        }, 7000);
+                    });
                 });
         });
     });
